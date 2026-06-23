@@ -19,7 +19,7 @@ export const BottomTabNavigator = () => {
         },
       }}>
       <Tab.Screen
-        name="Tasks Stack"
+        name="My Tasks"
         component={TasksStack}
         options={{ headerShown: false }}
       />

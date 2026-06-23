@@ -1,25 +1,36 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
 
 type ActionButtonProps = {
   text: string;
+  onPress: () => void;
+  disabled?: boolean;
 };
 
-const ActionButton = ({ text }: ActionButtonProps) => {
+const ActionButton = ({ text, onPress, disabled }: ActionButtonProps) => {
   return (
-    <View style={{
-      flex: 1,
-      paddingVertical: 12,
-      borderRadius: 8,
-      alignItems: "center",
-      backgroundColor: "#E5E7EB",
-    }}>
-      <Text style={{
-        color: "#110f0f",
-        fontWeight: "600"
-      }}>{text}</Text>
-    </View>
-  )
-}
+    <TouchableOpacity
+      onPress={onPress}
+      disabled={disabled}
+      style={{
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: "center",
+        backgroundColor: disabled ? "#D1D5DB" : "#E5E7EB",
+        opacity: disabled ? 0.6 : 1,
+      }}
+    >
+      <Text
+        style={{
+          color: "#111827",
+          fontWeight: "600",
+        }}
+      >
+        {text}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
-export default ActionButton
+export default ActionButton;

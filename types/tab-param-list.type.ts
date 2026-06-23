@@ -1,4 +1,4 @@
 export type TabParamList = {
-  'Tasks Stack': undefined;
+  'My Tasks': undefined;
   'Add Task': undefined;
 };

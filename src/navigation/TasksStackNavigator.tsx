@@ -4,7 +4,7 @@ import { TasksScreen } from "../screens/TasksScreen";
 
 export type TasksStackParamList = {
     Tasks: undefined;
-    TaskDetails: { taskId: number };
+    TaskDetails: { taskId: string };
 };
 
 const Stack = createNativeStackNavigator<TasksStackParamList>();

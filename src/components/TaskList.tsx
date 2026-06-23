@@ -17,6 +17,11 @@ const TaskList = ({ tasks }: { tasks: Task[] }) => {
             data={tasks}
             keyExtractor={(item) => item.id.toString()}
             ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+            contentContainerStyle={{
+                paddingTop: 10,
+                paddingBottom: 140,
+                flexGrow: 1,
+            }}
             renderItem={({ item }) => (
                 <Pressable
                     onPress={() =>
@@ -38,7 +43,7 @@ const TaskList = ({ tasks }: { tasks: Task[] }) => {
                         }}
                     >
                         <TaskCard task={item} />
-                        <Text style={{ color: "#007AFF", marginTop: 8 }}>
+                        <Text style={{ color: "#007AFF", paddingTop: 8 }}>
                             Tap to view details →
                         </Text>
                     </View>

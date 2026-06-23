@@ -1,20 +1,47 @@
 import { Text, View } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+
 import { useTask } from "../hooks/useTask";
+import { useDeleteTask } from "../hooks/useDeleteTask";
+import { useUpdateTask } from "../hooks/useUpdateTask";
+
 import TaskCard from "../components/TaskCard";
-import { useRoute } from "@react-navigation/native";
 import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
-import { type Task } from "../../types/task.type";
 import ActionButton from "../components/ActionButton";
+
+import { type Task } from "../../types/task.type";
 
 const TaskDetailsScreen = () => {
   const route = useRoute();
-  const { taskId } = route.params as { taskId: number };
+  const navigation = useNavigation();
+
+  const { taskId } = route.params as { taskId: string };
+
   const { data, isLoading, error } = useTask(taskId);
+
+  const { mutate: deleteTask, isPending: isDeleting } = useDeleteTask();
+  const { mutate: updateTask, isPending: isUpdating } = useUpdateTask();
 
   if (isLoading) return <Spinner />;
   if (error) return <ErrorMessage error={error} />;
   if (!data) return <Text>Task not found.</Text>;
+
+  const handleDelete = () => {
+    deleteTask(taskId, {
+      onSuccess: () => {
+        navigation.goBack();
+      },
+    });
+  };
+
+  const handleToggleStatus = () => {
+    updateTask({
+      taskId,
+      status:
+        data.status === "Completed" ? "Not completed" : "Completed",
+    });
+  };
 
   return (
     <View
@@ -39,8 +66,15 @@ const TaskDetailsScreen = () => {
           gap: 10,
         }}
       >
-        <ActionButton text="Delete" />
-        <ActionButton text="Edit Status" />
+        <ActionButton
+          text={isDeleting ? "Deleting..." : "Delete"}
+          onPress={handleDelete}
+        />
+
+        <ActionButton
+          text={isUpdating ? "Updating..." : "Edit Status"}
+          onPress={handleToggleStatus}
+        />
       </View>
     </View>
   );

@@ -13,8 +13,9 @@ const TaskCard = ({ task }: TaskCardProps) => {
             <Text style={task.status === "Completed" ? { color: "green" } : { color: "red" }}>
                 {task.status}
             </Text>
-            <Text style={{ fontSize: 12, color: "#888" }}>Date Created: {task.createdDate}</Text>
-
+            <Text style={{ fontSize: 12, color: "#888" }}>
+                Date Created: {new Date(task.createdDate).toLocaleString()}
+            </Text>
         </View>
     )
 }
