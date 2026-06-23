@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TabParamList } from "../../types/tab-param-list.type";
-import { TasksScreen } from "../screens/TasksScreen";
+import { type TabParamList } from "../../types/tab-param-list.type";
 import { AddTaskScreen } from "../screens/AddTaskScreen";
+import { TasksStack } from "../navigation/TasksStackNavigator";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -18,8 +18,15 @@ export const BottomTabNavigator = () => {
           backgroundColor: '#253eba',
         },
       }}>
-      <Tab.Screen name="Tasks" component={TasksScreen} />
-      <Tab.Screen name="Add Task" component={AddTaskScreen} />
+      <Tab.Screen
+        name="Tasks Stack"
+        component={TasksStack}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Add Task"
+        component={AddTaskScreen}
+      />
     </Tab.Navigator>
   );
 }
